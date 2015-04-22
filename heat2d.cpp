@@ -13,13 +13,13 @@ template<class PATTERN>
 class Heatmap
 {
     private:
-        std::unique_ptr<dash::Matrix<double, PATTERN>> m_u;
-        std::unique_ptr<dash::Matrix<double, PATTERN>> m_v;
+        std::unique_ptr<dash::Array2D<double, PATTERN>> m_u;
+        std::unique_ptr<dash::Array2D<double, PATTERN>> m_v;
 
     public:
         Heatmap(const size_type rows=0, const size_type columns=0) :
-            m_u(new dash::Matrix<double, PATTERN>(rows, columns)),
-            m_v(new dash::Matrix<double, PATTERN>(rows, columns))
+            m_u(new dash::Array2D<double, PATTERN>(rows, columns)),
+            m_v(new dash::Array2D<double, PATTERN>(rows, columns))
         {}
 
         ~Heatmap() {}
@@ -93,7 +93,6 @@ class Heatmap
                 std::cout << pretty_print(*m_u) << "\n";
         }
 };
-
 
 int main(int argc, char** argv)
 {

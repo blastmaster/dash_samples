@@ -1,4 +1,8 @@
+#ifndef _DASH_UTILS_H_
+#define _DASH_UTILS_H_
+
 #include <iostream>
+#include <iomanip>
 #include <libdash.h>
 
 /**
@@ -14,6 +18,23 @@ std::string dump(dash::Array<T>& arr)
     }
     ss << std::endl;
     return ss.str();
+}
+
+template<class T, class P>
+std::string pretty_print(dash::Array2D<T,P>& mat)
+{
+    std::stringstream oss;
+    for (int c = 0; c < mat.rows(); ++c)
+    {
+        oss << "\n|";
+        std::for_each(mat.row_begin(c),
+                mat.row_end(c),
+                [&oss] (T el) {
+                    oss << std::setprecision(5) << std::fixed << el << "\t| ";
+                });
+    }
+    oss << "\n";
+    return oss.str();
 }
 
 /**
@@ -43,3 +64,5 @@ void borders_iexchange(dash::Array<T>& b)
     }
     b.barrier();
 }
+
+#endif /* _DASH_UTILS_H_ */
